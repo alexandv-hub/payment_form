@@ -1,0 +1,49 @@
+server:
+  port: 443
+  ssl:
+    key-store: classpath:ssl/keystore.p12
+    key-store-password: yourkeystorepassword
+    keyStoreType: PKCS12
+    keyAlias: yourkeyalias
+
+spring:
+  application:
+    name: payment_form
+  mvc:
+    view:
+      prefix: /templates/
+      suffix: .html
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${spring.datasource.name}
+    name: payment_form_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+logging:
+  level:
+    root: INFO
+  file:
+    name: logs/application.log
+
+api:
+  url: https://engine-sandbox.pay.tech/api/v1/payments
+  bearer:
+   token: cAmmvalAikARkB81fgxgMtnMbEdNbuWa
+  customer:
+   referenceId: customer_123
+  http-client:
+    connect-time-out: 5
+    request-time-out: 10
+    max-retries: 3
+
+validation:
+  amount:
+    pattern: "^\\d{1,12}(\\.\\d{1,2})?$"

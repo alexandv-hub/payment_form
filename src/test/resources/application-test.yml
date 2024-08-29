@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${spring.datasource.name}
+    name: payment_form_db_test
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: false
+    locations: classpath:db/migration
+  test:
+    database:
+      replace: NONE
+
+logging:
+  level:
+    root: INFO
+
+api:
+  url: https://engine-sandbox.pay.tech/api/v1/payments
+  bearer:
+   token: cAmmvalAikARkB81fgxgMtnMbEdNbuWa
+  customer:
+   referenceId: customer_123
